@@ -11,5 +11,13 @@ import { createApp } from "vue"
 // 2.使用createApp，传入根组件，创建应用实例
 const app = createApp(App);
 
+// 注册全局混入对象
+app.mixin({
+    mounted() {
+        // this.$el:组件的根元素
+        console.log(this.$el, "dom准备好了");;
+    },
+})
+
 // 3.将应用实例挂载到根容器
 app.mount("#app");
