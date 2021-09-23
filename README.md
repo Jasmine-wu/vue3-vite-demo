@@ -9,6 +9,20 @@
     yarn dev
  ```
 ### 02-创建vue3应用实例
+- vue2
+```js
+  import Vue from 'vue'
+  // 传入根组件创建vue根实例挂载到根容器上
+  new Vue({
+      el: '#app',
+      router,
+      store,
+      // 挂载i18n，这样所有实例都拥有了$t函数
+      i18n,
+      render: h => h(App)
+  })
+```
+- vue3
 ```js
     // main.js的作用：
     // vue2: 创建根实例挂载到根容器
@@ -25,6 +39,9 @@
 
     // 3.将应用实例挂载到根容器
     app.mount("#app");
+
+    // createApp(App).use(store).use(router).mount('#app')
+
     
 ```
 ### 03-选项API和组合API
@@ -107,9 +124,9 @@
     });
 ```
 #### -监听响应式数据某个属性的变化
-- 3.属性要用函数的形式:() => user.name
-- 1.如果监听的属性是简单数据类型
-- 2.如果监听的属性是复杂数据类型的，属性变化默认是监听不到的，需开深度监听
+- 1.属性要用函数的形式:() => user.name
+- 如果监听的属性是简单数据类型
+- 如果监听的属性是复杂数据类型的，属性变化默认是监听不到的，需开深度监听
 
 ```js
     const updateName = () => {
@@ -132,17 +149,17 @@
     );
 ```
 
-### 10-组合API-ref属性（不同于vue2）
-- vue2ref属性获取单个/多个元素
-- 1. 标签设置ref属性
-- 2. this.$refs.ref属性值
-
-
-
+### 10-组合API-ref属性
+- vue2:
+  - ref属性获取单个/多个元素
+    - 1. 标签设置ref属性
+    - 2. this.$refs.ref属性值
+  
+- vue3:
 #### -ref属性获取单个元素
-- 1.1 先定义一个空的响应式数据,并return返回出去
-- 1.2 标签的ref设置值设置为该数据名，这是你的ref就跟元素绑定起来了
-- 1.3 在onMounted钩子函数中直接通过该数据名.value获取
+- 1 先定义一个空的响应式数据,并return返回出去
+- 2 标签的ref设置值设置为该数据名，这是你的ref就跟元素绑定起来了
+- 3 在onMounted钩子函数中直接通过该数据名.value获取
 
 ```html
     <h1 ref="title">title</h1>
@@ -154,9 +171,9 @@
     });
 ```
 #### -ref属性获取多个元素
-- 2.1 定义一个空数组
-- 2.2 定义一个函数，往空数组里push dom
-- 2.3 设置ref属性为该函数
+- 1 定义一个空数组
+- 2 定义一个函数，往空数组里push dom
+- 3 设置ref属性为该函数
 ```html
   <ul>
       <li v-for="i in 4" :key="i" :ref="collectLi">{{ i }}</li>
@@ -172,7 +189,7 @@
 
 ### 11-组合API-父子通信
 #### -父传子
-- 父组件中：
+- 父组件设置子组件prop属性
 ```js
   setup() {
     // 父传子
@@ -181,8 +198,7 @@
   },
 ```
 
-#### -子组件获取父组件设置的prop
-- 子组件中：
+- 子组件获取父组件设置的prop属性值
 ```js
   setup(props) {
     // 在子组件中如何获取父组件传过来的数据？
@@ -193,8 +209,7 @@
   },
 
 ```
-### - 子组件向父组件传递数据
-- 子组件中
+### - 子传父
 ```js
   setup(props, { emit }) {
   
@@ -206,17 +221,17 @@
   },
 ```
 ### 12-组合API-v-model新用法
-#### v-model的使用
 - vue2实现双向数据绑定的两种方法：
   - 1. v-model
   - 2. .sync
 - vue3新用法：是v-model和.sync的合并用法
   - 父组件：
 
+#### v-model的基本使用
 ```html
  <div>
     <!-- v-model -->
-    <son v-model:name="name" />
+    <son v-model="name" />
   </div>
 ```
   - 子组件：
@@ -336,7 +351,6 @@ app.mixin({
       mixins: [followMixin],
     };
 
-
 ```
 - mixins/index.js
 ```js
@@ -363,6 +377,73 @@ app.mixin({
 ### -混入的问题
 - 属性覆盖/方法覆盖等逻辑代码冲突问题
 - 解决：组合API，将逻辑封装在函数里，函数里提供数据和方法
+
+### 15-路由vue-router
+- vue2
+```js
+    import Router from "vue-router"
+    import Vue from "vue"
+    Vue.use(Router);
+    const router =  new Router({
+            mode:'hash',
+            routes,
+    });
+    export default router;
+```
+- vue3
+```js
+      import { createRouter, createWebHashHistory } from "vue-router"
+      const router = createRouter({
+        // createWebHashHistory：哈希路由模式
+        history: createWebHashHistory(),
+        routes
+      });
+      export default router;
+```
+
+### 16-vuex容器
+- vue2
+```js
+      import Vuex from "vuex"
+      import Vue from 'vue'
+      Vue.use(Vuex)
+      const store = new Vuex.Store({
+        modules: {
+            app,
+            settings,
+            user,
+            permission,
+            tagsView,
+        },
+        getters
+      })
+      export default store
+```
+- vue3
+```js
+    import { createStore } from 'vuex'
+
+    export default createStore({
+      state: {
+      },
+      mutations: {
+      },
+      actions: {
+      },
+      modules: {
+      }
+    })
+
+```
+### 17-vue2与vue3的不同
+- 数据响应式原理：劫持属性设置获取->劫持整个对象
+- 新增组合API
+- vue-router的创建
+- vuex的创建
+- v-model的新用法
+- vue2组件必须要有根标签, vue3不需要
+- ref属性获取元素
+
 
 
 
