@@ -1,14 +1,14 @@
-## Vue3 vite项目的基础使用
+# Vue3 vite项目的基础使用
 - vue3要下载vue3的调试工具
 - vue3构建工具打包工具vite，是用来替换vue-cli的，vue-cli基于webpack
 
-### 01-创建vue3 vite项目
+## 1-创建vue3 vite项目
  ```bash
     yarn create vite-app vue3-vite-base
     yarn 
     yarn dev
  ```
-### 02-创建vue3应用实例
+## 2-创建vue3应用实例
 - vue2
 ```js
   import Vue from 'vue'
@@ -44,6 +44,7 @@
 
     
 ```
+## 3-组合API
 ### 03-选项API和组合API
 - vue2有混入对象封装逻辑
 ### 04-组合API setup方法
@@ -55,7 +56,7 @@
 - 参数1: props对象，接收父组件传递进来的prop
 - 参数2: context对象，重要属性:emit
 
-### 05-组合API声明周期函数
+### 03-组合API声明周期函数
 - 注意：组合API从哪里导入，目前是从vue导入，不然会报错，具体看文档
 - setup 创建实例前
 - onBeforeMount 挂载DOM前
@@ -374,11 +375,11 @@ app.mixin({
     }
 
 ```
-### -混入的问题
+#### -混入的问题
 - 属性覆盖/方法覆盖等逻辑代码冲突问题
 - 解决：组合API，将逻辑封装在函数里，函数里提供数据和方法
 
-### 15-路由vue-router
+## 4-路由vue-router
 - vue2
 ```js
     import Router from "vue-router"
@@ -401,7 +402,7 @@ app.mixin({
       export default router;
 ```
 
-### 16-vuex容器
+## 5-vuex容器
 - vue2
 ```js
       import Vuex from "vuex"
@@ -435,14 +436,58 @@ app.mixin({
     })
 
 ```
-### 17-vue2与vue3的不同
-- 数据响应式原理：劫持属性设置获取->劫持整个对象
-- 新增组合API
-- vue-router的创建
-- vuex的创建
-- v-model的新用法
-- vue2组件必须要有根标签, vue3不需要
-- ref属性获取元素
+## 6-插件开发
+
+ vue3全局组件，多个页面中要使用的，放到vue插件中定义
+
+### -定义插件
+
+@/component/library/index.js文件中：
+
+```js
+// 插件：
+// 扩展vue原有的功能：全局组件，自定义指令，挂载原型方法，注意：没有全局过滤器。
+// vue2.0插件写法要素：导出一个对象，有install函数，默认传入了Vue构造函数，Vue基础之上扩展
+// vue3.0插件写法要素：导出一个对象，有install函数，默认传入了app应用实例，app基础之上扩展
+
+import YtnSkeleton from "./ytn-skeleton.vue"
+export default {
+    install(app) {
+        // 1.app 提供component/directive方法挂载全局组件/指令，不提供原型挂载
+        // 2.原型挂载要另外写：app.config.globalProperties.$http = xxx;
+        app.component(YtnSkeleton.name, YtnSkeleton)
+
+    }
+}
+```
+
+### -使用插件
+
+```js
+// 导入自己的全局组件库
+import YtnUI from "@/components/library"
+
+createApp(App).use(store).use(router).use(YtnUI).mount('#app');
+```
+
+
+## 总结-vue3与vue2的不同
+- 1.数据响应式原理：劫持属性设置获取->劫持整个对象
+- 2.新增组合API
+- 3.vue-router的创建
+- 4.vuex的创建
+- 5.v-model的新用法
+- 6.vue2组件模版必须要有根标签, vue3不需要
+- 7.ref属性获取元素
+- 8.实例创建：
+  - vue2:传入App根组件，创建vue实例挂载到根容器上。所有东西挂载到根实例上
+  - vue3:传入App根实例，创建app实例实例挂载到根容器上。所有东西挂载到应用实例上
+- 9.没有全局过滤器
+- 10. 全局API：
+    - vue3没有全局过滤器
+    - 移除extend方法了
+    - Vue.component => app.component
+    - 挂载原型的方式：Vue.prototype => app.config.globalProperties
 
 
 
