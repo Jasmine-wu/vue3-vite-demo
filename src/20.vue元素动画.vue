@@ -1,6 +1,6 @@
 <template>
   <div>
-    <transition name="h">
+    <transition>
       <h1 v-if="show">显示还是吟唱</h1>
     </transition>
 
@@ -27,29 +27,29 @@ h1 {
 /* v-enter-from /v-enter-active/ v-enter-to */
 /* 元素出现时添加透明度过渡动画 */
 /* 进入前 */
-.h-enter-from {
-  height: 0;
+.v-enter-from {
+  opacity: 0;
 }
 /* 进入中 */
-.h-enter-active {
+.v-enter-active {
   transition: all 2s;
 }
 /* 进入后 */
-.h-enter-to {
-  height: 100px;
+.v-enter-to {
+  opacity: 1;
 }
 /* v-leave /v-leave-active/ v-leave-to */
 /* 元素移除时添加透明度过渡动画 */
 /* 移除前 */
-.h-leave-from {
-  height: 100px;
+.v-leave-from {
+  opacity: 1;
 }
 /* 移除中 */
-.h-leave-active {
+.v-leave-active {
   transition: all 2s;
 }
 /* 移除后 */
-.h-leave-to {
-  height: 0px;
+.v-leave-to {
+  opacity: 0;
 }
 </style>
