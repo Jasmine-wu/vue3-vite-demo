@@ -7,17 +7,20 @@
 // 1.创建根组件
 import App from "./App.vue"
 import { createApp } from "vue"
+import MyUI from "./library"
 
 // 2.使用createApp，传入根组件，创建应用实例
 const app = createApp(App);
 
 // 注册全局混入对象
-app.mixin({
-    mounted() {
-        // this.$el:组件的根元素
-        console.log(this.$el, "dom准备好了");;
-    },
-})
+// app.mixin({
+//     mounted() {
+//         // this.$el:组件的根元素
+//         console.log(this.$el, "dom准备好了");;
+//     },
+// })
 
+
+app.use(MyUI);
 // 3.将应用实例挂载到根容器
 app.mount("#app");
