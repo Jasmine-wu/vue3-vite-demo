@@ -1,4 +1,5 @@
 <template>
+  <!-- transition动画生效的前提条件：元素要有创建（enter）和移除（leave）变化 -->
   <transition name="fade">
     <div class="box1" v-if="show">box1</div>
     <div class="box2" v-else>box2</div>

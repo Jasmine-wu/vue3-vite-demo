@@ -1,6 +1,5 @@
 <template>
   <breadcrumb>
-    111111
     <breadcrumb-item>章三</breadcrumb-item>
     <breadcrumb-item>里斯</breadcrumb-item>
     <breadcrumb-item>王武</breadcrumb-item>
