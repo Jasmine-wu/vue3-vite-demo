@@ -9,15 +9,15 @@
   </div>
 </template>
 <script>
-import Son from "./Son3.vue";
-import { ref } from "vue";
-export default {
-  components: {
-    Son,
-  },
-  setup() {
-    let count = ref(0);
-    return { count };
-  },
-};
+  import Son from "./Son3.vue";
+  import { ref } from "vue";
+  export default {
+    components: {
+      Son,
+    },
+    setup() {
+      let count = ref(0);
+      return { count };
+    },
+  };
 </script>

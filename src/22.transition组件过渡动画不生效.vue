@@ -8,42 +8,40 @@
   <button @click="show = !show">切换显示/隐藏</button>
 </template>
 <script>
-import { ref } from "vue";
-export default {
-  name: "App",
-  setup() {
-    const show = ref(true);
-    return { show };
-  },
-};
+  import { ref } from "vue";
+  export default {
+    name: "App",
+    setup() {
+      const show = ref(true);
+      return { show };
+    },
+  };
 </script>
 <style lang="less" scoped>
-.box1 {
-  width: 100px;
-  height: 50px;
-  background-color: red;
-}
+  .box1 {
+    width: 100px;
+    height: 50px;
+    background-color: red;
+  }
 
-.box2 {
-  width: 100px;
-  height: 50px;
-  background-color: blue;
-}
+  .box2 {
+    width: 100px;
+    height: 50px;
+    background-color: blue;
+  }
 
-.fade {
-  &-leave {
-    &-from {
-      opacity: 1;
-    }
-    &-active {
-      position: absolute;
-      transition: opacity 2s;
-    }
-    &-to {
-      opacity: 0;
+  .fade {
+    &-leave {
+      &-from {
+        opacity: 1;
+      }
+      &-active {
+        position: absolute;
+        transition: opacity 2s;
+      }
+      &-to {
+        opacity: 0;
+      }
     }
   }
-}
 </style>
-
-

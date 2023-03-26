@@ -6,21 +6,21 @@
   </div>
 </template>
 <script>
-export default {
-  name: "Son3",
-  props: {
-    modelValue: {
-      type: Number,
-      default: 0,
+  export default {
+    name: "Son3",
+    props: {
+      modelValue: {
+        type: Number,
+        default: 0,
+      },
     },
-  },
-  setup(props, { emit }) {
-    // 这样获取的属性值不是响应式的
-    // let count = props.modelValue;
-    const updateCount = () => {
-      emit("update:modelValue", 100);
-    };
-    return { updateCount };
-  },
-};
+    setup(props, { emit }) {
+      // 这样获取的属性值不是响应式的
+      // let count = props.modelValue;
+      const updateCount = () => {
+        emit("update:modelValue", 100);
+      };
+      return { updateCount };
+    },
+  };
 </script>

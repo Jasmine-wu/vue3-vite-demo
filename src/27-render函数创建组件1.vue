@@ -5,11 +5,8 @@
   <anchored-heading4 :level="4">Hello world!</anchored-heading4>
 </template>
 <script>
-export default {
-  name: "app",
-};
+  export default {
+    name: "app",
+  };
 </script>
-<style lang="less" scoped>
-</style>
-
-
+<style lang="less" scoped></style>

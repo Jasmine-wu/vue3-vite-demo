@@ -8,11 +8,11 @@
   </div>
 </template>
 <script>
-import { followMixin } from "./mixins";
-export default {
-  name: "Son4",
-  // 局部混入
-  mixins: [followMixin],
-};
+  import { followMixin } from "./mixins";
+  export default {
+    name: "Son4",
+    // 局部混入
+    mixins: [followMixin],
+  };
 </script>
 <style scoped lang="less"></style>

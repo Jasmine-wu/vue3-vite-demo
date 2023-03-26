@@ -5,16 +5,16 @@
   </button>
 </template>
 <script>
-import { inject } from "vue";
-export default {
-  setup(props, { emit }) {
-    // 接收父组件共享的数据
-    const money = inject("money");
+  import { inject } from "vue";
+  export default {
+    setup(props, { emit }) {
+      // 接收父组件共享的数据
+      const money = inject("money");
 
-    // 获取父组件共享的方法，修改数据
-    const updateMoney = inject("updateMoney");
+      // 获取父组件共享的方法，修改数据
+      const updateMoney = inject("updateMoney");
 
-    return { money, updateMoney };
-  },
-};
+      return { money, updateMoney };
+    },
+  };
 </script>

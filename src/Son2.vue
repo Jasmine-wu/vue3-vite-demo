@@ -5,19 +5,19 @@
   </div>
 </template>
 <script>
-export default {
-  name: "Son2",
-  props: {
-    name: {
-      type: String,
+  export default {
+    name: "Son2",
+    props: {
+      name: {
+        type: String,
+      },
     },
-  },
-  setup(props, { emit }) {
-    // 2.子组件如何向父组件传值？
-    const updateName = () => {
-      emit("update:name", "zhangsan");
-    };
-    return { updateName };
-  },
-};
+    setup(props, { emit }) {
+      // 2.子组件如何向父组件传值？
+      const updateName = () => {
+        emit("update:name", "zhangsan");
+      };
+      return { updateName };
+    },
+  };
 </script>

@@ -5,9 +5,9 @@
 // vue3: 所有东西挂载到应用实例上
 
 // 1.创建根组件
-import App from "./App.vue"
-import { createApp } from "vue"
-import MyUI from "./library"
+import App from "./App.vue";
+import { createApp } from "vue";
+import MyUI from "./library";
 
 // 2.使用createApp，传入根组件，创建应用实例
 const app = createApp(App);
@@ -19,7 +19,6 @@ const app = createApp(App);
 //         console.log(this.$el, "dom准备好了");;
 //     },
 // })
-
 
 app.use(MyUI);
 // 3.将应用实例挂载到根容器

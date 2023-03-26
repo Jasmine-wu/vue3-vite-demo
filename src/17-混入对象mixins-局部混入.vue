@@ -12,14 +12,14 @@
   </div>
 </template>
 <script>
-import Son from "./Son4.vue";
-import { followMixin } from "./mixins";
-export default {
-  name: "App",
-  components: {
-    Son,
-  },
-  // 局部混入
-  mixins: [followMixin],
-};
+  import Son from "./Son4.vue";
+  import { followMixin } from "./mixins";
+  export default {
+    name: "App",
+    components: {
+      Son,
+    },
+    // 局部混入
+    mixins: [followMixin],
+  };
 </script>
